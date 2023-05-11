@@ -7,6 +7,21 @@ tags: [AI, hardware]
 
 Artificial Intelligence may sound like a fancy and cutting-edge term, it has a long and roller-coaster like history.
 
+<div class="timeline">
+    <div class="tl-container tl-left">
+        <div class="tl-content">
+            <h2>1943</h2>
+            <p>McCulloch and Pitts</p>
+        </div>
+    </div>
+    <div class="tl-container tl-right">
+        <div class="tl-content">
+            <h2>2018</h2>
+            <p></p>
+        </div>
+
+    </div>
+</div>
 ## The Dawn (Pre-1960)
 
 The first "artificial intelligence" work was carried out back in 1943 by [McCulloch and Pitts](https://home.csulb.edu/~cwallis/382/readings/482/mccolloch.logical.calculus.ideas.1943.pdf). Based on the theoretical neurophysiology and how neurons communicate in the nervous system, they proposed a computational node modelling (M-P Model) that simulates neuron behavior, and proved that any logical proposition can be encoded to a corresponding neuron network by structuring the nodes differently. Given human brain is a neuron network, this hints it encodes a complicated program, and that it can theoretically be simulated through artifical networks so we can achieve an algorithm that can learn and think. Although from today's view their fixed-threshold modeling of neuron was too simple thus flawed, it paved the way for what will be known as Artificial Intelligence, and inspired cross-disciplinary researches between neuroscience and computation.
