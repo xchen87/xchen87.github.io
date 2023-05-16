@@ -1,6 +1,6 @@
 ---
 title: Dynamic Library Handling - Nitty Gritty of Relocation
-date: 2023-05-12 11:33:00 +0800
+date: 2023-05-15 22:30:00 +0800
 categories: [Software]
 tags: [software, os]
 ---
