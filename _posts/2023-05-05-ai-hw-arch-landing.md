@@ -1,7 +1,7 @@
 ---
 title: AI Hardwares
 date: 2023-05-05 11:33:00 +0800
-categories: [Blogging, AI]
+categories: [AI]
 tags: [AI, hardware]
 ---
 
