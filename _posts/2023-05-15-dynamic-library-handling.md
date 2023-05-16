@@ -278,12 +278,13 @@ Mapped address spaces:
 Now we have all our dynamic libraries mapped into the program's memory view, and we are ready to execute our main function.
 
 ### Lazy Binding vs. Eager Binding
-Dynamic linker helps resolves the dynamic symbols, but when does it do that? Imagine you have a complex program that has lots of dynamic library dependencies, having the dynamic linker to go through everything before our `main` function even gets a chance to run is obviously not desired.  
+Dynamic linker helps resolves the dynamic symbols, but when does it do that? Imagine you have a complex program that has lots of dynamic library dependencies, having the dynamic linker to go through everything before `main` function even gets a chance to run *might* not desired, depends on what you want.  
 * Eager Binding: All symbols resolved before `main`.
 * Lazy (Deferred) Binding: Symbols are resolved upon the first time they are encountered.
 
-Eager Binding increases the pre-main handling time, but provides guarantees that related issues will be exposed before `main` gets executed. For example GDB does eager binding when it loads a program.  
-Lazy Binding is the default behavior for the most though, for performance gains it brings. And once the symbols are resolved upon first encounter, the info will be saved for following use.  
+Eager Binding increases the pre-main handling time, but provides some benefits, such as to expose related issues early, and to shift symbol resolving overhead to program init time which in turn makes execution faster.    
+Lazy Binding is the default behavior for the most.  
+One thing to keep in mind is that exactly which kind of binding dynamic loader will use isn't that clear cut, it is influenced by various factors, such as which OS & dynamic linker are used and which version, specific program runtime environment, etc.
 
 ## Complete Relocation Process at Runtime
 
