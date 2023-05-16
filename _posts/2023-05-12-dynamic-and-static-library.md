@@ -5,11 +5,11 @@ categories: [Software]
 tags: [software, os]
 ---
 
-While most software engineers are aware of the basic concept of dynamic libraries and how they differ from static libraries. Not everyone knows the nitty gritty of how they actually work especially the implementation and implication details. I had to do some digging recently on an related problem, and hope the lesson learned can offer some help to you as well!      
+While most software engineers are aware of the basic concept of dynamic libraries and how they differ from static libraries. Not everyone knows the nitty gritty of how they actually work especially the implementation and implication details. I had to do some digging recently on something related, and hope the lesson learned can offer some help to you as well!      
 \
-For illustration purpose, I'll use a simple c++ program that compiled with gcc on Linux as example. The compiled target will be ELF files, I encourage you to read its spec [HERE](https://refspecs.linuxfoundation.org/elf/elf.pdf).  
+For illustration purpose, I'll use a simple c++ program that compiled with gcc on Linux as an example. The compiled target will be ELF files, I encourage you to read its spec [HERE](https://refspecs.linuxfoundation.org/elf/elf.pdf).  
 \
-First we write a very simple library function call that adds 1 to each element of a vector:
+First we write a very simple library function that adds 1 to each element of a vector:
 ```c++
 #include <mylib.h>
 #include <iostream>
@@ -18,7 +18,7 @@ void vec_add(std::vector<int>& vec) {
     for (auto& e : vec) e = e + 1;
 }
 ```
-This file will be used for creating a library for our main executable to link. Then we write a main function that links the library:
+This file will be used for creating a library for our main executable to link. Then we write the main function:
 ```c++
 #include <iostream>
 #include <mylib.h>
@@ -68,9 +68,9 @@ Size Comparison:
 6550 libmylib_static.a
 16544 libmylib.so.1.0.0
 ```
-So when you create dynamic libraries, make sure `-fPIC` is applied to all objects it contains, especially the ones it links through other static libraries. In which case compiler will just copy the object code it needs into target dynamic library, if those binary codes from static library source are not position independent, they may cause runtime failure.  
+When you create dynamic libraries, make sure `-fPIC` is applied to all objects it contains, especially the ones it links through other static libraries. In which case compiler will just copy the object code it needs into target dynamic library. If those binary codes from static library source are not position independent, they may cause runtime failure.  
 \
-On the other hand, if you don't actually need dynamic libraries, try to avoid `-fPIC` flag, per the disadvantages.
+On the other hand, if you don't actually need dynamic libraries, don't use `-fPIC` flag.
 ## GOT and PLT
 GOT stands for *Global Offset Table*. It is a *data* section that contains a table of offsets for external symbols.  
 PLT stands for *Procedure Linkage Table*. This is a *code* section that contains the stubs for external function calls, it provides a level of indirection and helps to resolve the function address at runtime. Detail process will be discussed below.  
@@ -86,7 +86,7 @@ There are 39 section headers, starting at offset 0xdaf8:
          0000000000000098  0000000000000008  WA       0     0     8
 ```
 
-We can also examine the executable's relocatable symbols and see our `vec_add` function in the `.rela.plt` section. Specifically, `.rela.plt` are the symbols that goes through PLT stub indirection, and `.rela.dyn` contains all other symbols that needs relocation.
+We can also examine the executable's relocatable symbols and see our `vec_add` function in the `.rela.plt` section. Specifically, `.rela.plt` are the symbols that go through PLT stub indirection, and `.rela.dyn` contains all other symbols that needs relocation.
 ```bash
 xinchen@xinchen-pc:~/code/relocation/build$ readelf -r main_dyn
 
