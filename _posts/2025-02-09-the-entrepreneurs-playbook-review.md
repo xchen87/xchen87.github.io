@@ -5,7 +5,7 @@ categories: [BookReview]
 tags: [BookReview]
 ---
 
-![CoverImage]({{ site.baseurl }}/assets/img/the_entrepreneurs_playbook.jpg)
+![CoverImage]({{ site.url }}/{{ site.baseurl }}/assets/img/the_entrepreneurs_playbook.jpg)
 Author: Leonard C. Green
 
 ## Principle#1 Find a Marketplace Challenge That Needs to Be Solved or Improved
