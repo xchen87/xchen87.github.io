@@ -1,6 +1,6 @@
 ---
 title: Principles
-date: 2025-02-09 14:34 +0800
+date: 2025-02-015 14:34 +0800
 categories: [BookReview]
 tags: [BookReview]
 ---
